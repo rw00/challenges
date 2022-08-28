@@ -10,8 +10,8 @@ import org.rw.challenges.snip.CaseDetails.Builder;
 import org.rw.challenges.snip.CaseDetails.TrunksInfo;
 import org.rw.challenges.snip.CaseDetails.TrunksInfoBuilder;
 import org.rw.challenges.snip.util.ArrayPermutationsHelper;
-import org.rw.challenges.snip.util.InputReader;
-import org.rw.challenges.snip.util.OutputWriter;
+import org.rw.challenges.common.InputReader;
+import org.rw.challenges.common.SimpleOutputWriter;
 
 
 public class LegoTreeTrunksCutter {
@@ -64,10 +64,10 @@ public class LegoTreeTrunksCutter {
     public void run(List<CaseDetails> caseInputs) {
         int caseNumber = 1;
         for (CaseDetails caseInput : caseInputs) {
-            OutputWriter.write("Case " + caseNumber);
+            SimpleOutputWriter.write("Case " + caseNumber);
             CaseProcessingResult caseProcessingResult = processCase(caseInput);
-            OutputWriter.write("Max profit: " + caseProcessingResult.maxProfit);
-            OutputWriter.write("Order: " + buildOrderingResultString(caseProcessingResult.ordering));
+            SimpleOutputWriter.write("Max profit: " + caseProcessingResult.maxProfit);
+            SimpleOutputWriter.write("Order: " + buildOrderingResultString(caseProcessingResult.ordering));
             caseNumber++;
         }
     }

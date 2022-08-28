@@ -1,4 +1,4 @@
-package org.rw.challenges.snip.util;
+package org.rw.challenges.common;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
