@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+// TO DO : My solution **could** be not performant and incorrect for some edge cases.
 public class CheckGraphCycle {
 
     public boolean solution(int[] a, int[] b) {

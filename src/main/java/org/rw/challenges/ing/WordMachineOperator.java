@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 
-public class MachineOperator {
-
+public class WordMachineOperator {
+    public static final int ERROR_RESULT = -1;
     private static final Map<String, BiConsumer<Deque<Integer>, String>> FUNCTIONS = createSupportedOperationsMap();
     private static final String PUSH_COMMAND = "PUSH";
     private static final long MIN = 0;
@@ -22,15 +22,15 @@ public class MachineOperator {
                 BiConsumer<Deque<Integer>, String> function = FUNCTIONS.getOrDefault(command, FUNCTIONS.get(PUSH_COMMAND));
                 function.accept(stack, command);
             } catch (OperationException ignore) {
-                return -1;
+                return ERROR_RESULT;
             }
         }
-        return stack.isEmpty() ? -1 : stack.peek();
+        return stack.isEmpty() ? ERROR_RESULT : stack.peek();
     }
 
     private static Map<String, BiConsumer<Deque<Integer>, String>> createSupportedOperationsMap() {
         Map<String, BiConsumer<Deque<Integer>, String>> supportedOperations = new HashMap<>();
-        supportedOperations.put(PUSH_COMMAND, MachineOperator::push);
+        supportedOperations.put(PUSH_COMMAND, WordMachineOperator::push);
         supportedOperations.put("POP", (stack, command) -> pop(stack));
         supportedOperations.put("DUP", (stack, command) -> dup(stack));
         supportedOperations.put("+", (stack, command) -> add(stack));
@@ -40,9 +40,9 @@ public class MachineOperator {
 
     private static void push(Deque<Integer> stack, String num) {
         try {
-            int result = Integer.parseInt(num);
-            check(result >= MIN && result <= MAX);
-            stack.push(result);
+            int value = Integer.parseInt(num);
+            check(value >= MIN && value <= MAX);
+            stack.push(value);
         } catch (NumberFormatException translated) {
             throw new OperationException();
         }
@@ -72,8 +72,8 @@ public class MachineOperator {
         stack.push(result);
     }
 
-    private static void check(boolean value) {
-        if (!value) {
+    private static void check(boolean truthfulValue) {
+        if (!truthfulValue) {
             throw new OperationException();
         }
     }
